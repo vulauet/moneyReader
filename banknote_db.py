@@ -47,7 +47,7 @@ for i in range(0,504,3):
 	baseID = cursor.fetchone()
 	cursor.execute(getBanknoteID % str(data[i+1]))
 	rateID = cursor.fetchone()
-	value = (baseID, rateID, data[i+2])
+	value = (baseID[0], rateID[0], data[i+2])
 	cursor.execute(insertNewRate, value)
 db.commit()
 db.close()
