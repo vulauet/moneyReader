@@ -8,15 +8,17 @@ while True:
 	# db = MySQLdb.connect("localhost", "root", "toor", "banknote")
 	db = mariadb.connect(user="vula", password="mat.khau.cua.vula", database="vudb")
 	cursor = db.cursor()
-	resp = requests.get('http://128.199.160.37:12056/USD')
+	# resp = requests.get('http://128.199.160.37:12056/USD')
+	resp = requests.get('http://www.apilayer.net/api/live?access_key=dfc96bdc236e9d58869bec44fd74d277')
 	if resp.status_code != 200:
 		raise ApiError('GET /tasks/ {}'.format(resp.status_code))
 	result = resp.json()
-
-	for key in result:
-		cursor.execute('UPDATE update_exchange_rate SET rate = %s, last_update = %s WHERE base_banknote_code = %s AND rate_banknote_code = %s', (result[key], datetime.datetime.now(), key[:3], key[3:]))
-	db.commit()
-	db.close()
+	if result['success'] == True:
+		quotes = result['quotes']
+		for key in quotes:
+			cursor.execute('UPDATE update_exchange_rate SET rate = %s, last_update = %s WHERE base_banknote_code = %s AND rate_banknote_code = %s', (quotes[key], datetime.datetime.now(), key[:3], key[3:]))
+		db.commit()
+		db.close()
 	time.sleep(43200)
 # data = open('banknote.txt', 'r').read()
 # data = data.split('\n')
