@@ -20,7 +20,7 @@ class myHandler(BaseHTTPRequestHandler):
 	#Handler for the GET requests
 	def do_GET(self):
 		if self.path == '/update':
-			db = MySQLdb.connect(user="vula", password="mat.khau.cua.vula", database="vudb")
+			db = mariadb.connect(user="vula", password="mat.khau.cua.vula", database="vudb")
 			cursor = db.cursor()
 			cursor.execute('SELECT * FROM update_exchange_rate')
 			rows = cursor.fetchall()
