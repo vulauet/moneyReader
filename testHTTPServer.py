@@ -44,6 +44,8 @@ def datetime_serial(obj):
 	if isinstance(obj, datetime):
 		serial = obj.isoformat()
 		return serial
+	elif isinstance(obj, decimal.Decimal):
+		return float(obj)
 	raise TypeError("Type not serializable")
 
 if __name__ == '__main__':
