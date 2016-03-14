@@ -32,9 +32,9 @@ class myHandler(BaseHTTPRequestHandler):
 					rate.append(row)
 
 			cursor.execute('SELECT last_update FROM update_exchange_rate LIMIT 1')
-			last_update = cursor.fetchall()
+			last_update = cursor.fetchone()
 			db.close()
-			result = {'rate': rate, 'last_update': last_update}
+			result = {'rate': rate, 'last_update': last_update[0]}
 			self.send_response(200)
 			self.send_header('Content-type','text/html')
 			self.end_headers()
