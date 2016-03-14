@@ -6,7 +6,7 @@ import mysql.connector as mariadb
 
 while True:
 	# db = MySQLdb.connect("localhost", "root", "toor", "banknote")
-	db = MySQLdb.connect(user="vula", password="mat.khau.cua.vula", database="vudb")
+	db = mariadb.connect(user="vula", password="mat.khau.cua.vula", database="vudb")
 	cursor = db.cursor()
 	resp = requests.get('http://128.199.160.37:12056/USD')
 	if resp.status_code != 200:
