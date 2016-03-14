@@ -9,7 +9,7 @@ import cgi
 # import MySQLdb
 import mysql.connector as mariadb
 import json
-
+import decimal
 
 PORT_NUMBER = 12057
 
@@ -22,25 +22,29 @@ class myHandler(BaseHTTPRequestHandler):
 		if self.path == '/update':
 			db = mariadb.connect(user="vula", password="mat.khau.cua.vula", database="vudb")
 			cursor = db.cursor()
-			cursor.execute('SELECT * FROM update_exchange_rate')
+			cursor.execute('SELECT base_banknote_code, rate_banknote_code, rate FROM update_exchange_rate')
 			rows = cursor.fetchall()
 			columns = [desc[0] for desc in cursor.description]
 			db.close()
-			result = []
+			rate = []
 			if hasattr(rows, '__iter__'):
 				for row in rows:
 					row = dict(zip(columns, row))
-					result.append(row)
+					rate.append(row)
+
+			cursor.execute('SELECT last_update FROM update_exchange_rate LIMIT 1')
+			last_update = cursor.fetchall()
+			result = {'rate': rate, 'last_update': last_update}
 			self.send_response(200)
 			self.send_header('Content-type','text/html')
 			self.end_headers()
-			self.wfile.write(json.dumps(result, default=datetime_serial))
+			self.wfile.write(json.dumps(result, default=object_serial))
 		return
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 	"""Handle requests in a separate thread."""
 
-def datetime_serial(obj):
+def object_serial(obj):
 	if isinstance(obj, datetime):
 		serial = obj.isoformat()
 		return serial
