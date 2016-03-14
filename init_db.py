@@ -2,7 +2,7 @@
 import mysql.connector as mariadb
 
 # db = MySQLdb.connect("localhost", "root", "toor", "banknote")
-db = mariadb.connect("localhost", "vula", "mat.khau.cua.vula", "vudb")
+db = mariadb.connect(user = "vula", password = "mat.khau.cua.vula", database = "vudb")
 cursor = db.cursor()
 
 data = open('./rate/USD.txt', 'r').read()
