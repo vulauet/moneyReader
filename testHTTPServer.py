@@ -25,7 +25,6 @@ class myHandler(BaseHTTPRequestHandler):
 			cursor.execute('SELECT base_banknote_code, rate_banknote_code, rate FROM update_exchange_rate')
 			rows = cursor.fetchall()
 			columns = [desc[0] for desc in cursor.description]
-			db.close()
 			rate = []
 			if hasattr(rows, '__iter__'):
 				for row in rows:
@@ -34,6 +33,7 @@ class myHandler(BaseHTTPRequestHandler):
 
 			cursor.execute('SELECT last_update FROM update_exchange_rate LIMIT 1')
 			last_update = cursor.fetchall()
+			db.close()
 			result = {'rate': rate, 'last_update': last_update}
 			self.send_response(200)
 			self.send_header('Content-type','text/html')
