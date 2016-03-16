@@ -157,7 +157,25 @@ banknote_country = {'DZD': 'http://128.199.160.37:8001/flags/DZA.png',
 'RSD': 'http://128.199.160.37:8001/flags/SRB.png',
 'BHD': 'http://128.199.160.37:8001/flags/BHR.png',
 'JPY': 'http://128.199.160.37:8001/flags/JPN.png',
-'SDG': 'http://128.199.160.37:8001/flags/SDN.png'}
+'SDG': 'http://128.199.160.37:8001/flags/SDN.png',
+'XAF': '',
+'EEK': '',
+'XDR': '',
+'XOF': '',
+'ANG': '',
+'BTC': '',
+'XPF': '',
+'ZMK': '',
+'JEP': '',
+'CLF': '',
+'IMP': '',
+'CUC': '',
+'EUR': '',
+'XCD': '',
+'XAG': '',
+'RON': '',
+'GTQ': '',
+'XAU': ''}
 
 insertNewRate = "INSERT INTO exchange_rate (base_banknote_code, rate_banknote_code, image_link, rate) VALUES(%s, %s, %s, %s);"
 for i in range(0,len(data),3):

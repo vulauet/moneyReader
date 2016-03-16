@@ -44,7 +44,7 @@ banknote_country['CHF'] = 'http://128.199.160.37:8001/flags/CHE.png'
 banknote_country['DKK'] = 'http://128.199.160.37:8001/flags/DNK.png'
 
 for bc in banknote_country:
-	if banknote_country[bc] != '':
+	if banknote_country[bc] == '':
 		print bc + ": " + banknote_country[bc] + ","
 
 
