@@ -13,7 +13,10 @@ while True:
 	if resp.status_code != 200:
 		raise ApiError('GET /tasks/ {}'.format(resp.status_code))
 	result = resp.json()
+	i = 0
 	if result['success'] == True:
+		print i
+		i += 1
 		quotes = result['quotes']
 		for key in quotes:
 			cursor.execute('UPDATE update_exchange_rate SET rate = %s, last_update = %s WHERE base_banknote_code = %s AND rate_banknote_code = %s', (quotes[key], datetime.datetime.now(), key[:3], key[3:]))
