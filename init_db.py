@@ -161,7 +161,7 @@ banknote_country = {'DZD': 'http://128.199.160.37:8001/flags/DZA.png',
 
 insertNewRate = "INSERT INTO exchange_rate (base_banknote_code, rate_banknote_code, image_link, rate) VALUES(%s, %s, %s, %s);"
 for i in range(0,len(data),3):
-	value = (data[i], data[i+1], banknote_country[data[i+1], data[i+2])
+	value = (data[i], data[i+1], banknote_country[data[i+1]], data[i+2])
 	cursor.execute(insertNewRate, value)
 db.commit()
 db.close()
