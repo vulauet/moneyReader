@@ -1,8 +1,8 @@
-import MySQLdb
-# import mysql.connector as mariadb
+# import MySQLdb
+import mysql.connector as mariadb
 
-db = MySQLdb.connect("localhost", "root", "toor", "banknote")
-# db = mariadb.connect(user = "vula", password = "mat.khau.cua.vula", database = "vudb")
+# db = MySQLdb.connect("localhost", "root", "toor", "banknote")
+db = mariadb.connect(user = "vula", password = "mat.khau.cua.vula", database = "vudb")
 cursor = db.cursor()
 
 data = open('./rate/USD.txt', 'r').read()
@@ -159,7 +159,7 @@ banknote_country = {'DZD': 'http://128.199.160.37:8001/flags/DZA.png',
 'JPY': 'http://128.199.160.37:8001/flags/JPN.png',
 'SDG': 'http://128.199.160.37:8001/flags/SDN.png'}
 
-insertNewRate = "INSERT INTO exchange_rate (base_banknote_code, rate_banknote_code, image_link, rate) VALUES(%s, %s, %s);"
+insertNewRate = "INSERT INTO exchange_rate (base_banknote_code, rate_banknote_code, image_link, rate) VALUES(%s, %s, %s, %s);"
 for i in range(0,len(data),3):
 	value = (data[i], data[i+1], banknote_country[data[i+1], data[i+2])
 	cursor.execute(insertNewRate, value)

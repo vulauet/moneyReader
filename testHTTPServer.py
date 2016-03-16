@@ -22,7 +22,7 @@ class myHandler(BaseHTTPRequestHandler):
 		if self.path == '/update':
 			db = mariadb.connect(user="vula", password="mat.khau.cua.vula", database="vudb")
 			cursor = db.cursor()
-			cursor.execute('SELECT base_banknote_code, rate_banknote_code, rate FROM update_exchange_rate')
+			cursor.execute('SELECT base_banknote_code, rate_banknote_code, rate, image_link FROM exchange_rate')
 			rows = cursor.fetchall()
 			columns = [desc[0] for desc in cursor.description]
 			rate = []
@@ -31,7 +31,7 @@ class myHandler(BaseHTTPRequestHandler):
 					row = dict(zip(columns, row))
 					rate.append(row)
 
-			cursor.execute('SELECT last_update FROM update_exchange_rate LIMIT 1')
+			cursor.execute('SELECT last_update FROM exchange_rate LIMIT 1')
 			last_update = cursor.fetchone()
 			db.close()
 			result = {'rate': rate, 'last_update': last_update[0]}

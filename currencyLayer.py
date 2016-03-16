@@ -19,7 +19,7 @@ while True:
 		i += 1
 		quotes = result['quotes']
 		for key in quotes:
-			cursor.execute('UPDATE update_exchange_rate SET rate = %s, last_update = %s WHERE base_banknote_code = %s AND rate_banknote_code = %s', (quotes[key], datetime.datetime.now(), key[:3], key[3:]))
+			cursor.execute('UPDATE exchange_rate SET rate = %s, last_update = %s WHERE base_banknote_code = %s AND rate_banknote_code = %s', (quotes[key], datetime.datetime.now(), key[:3], key[3:]))
 		db.commit()
 		db.close()
 	time.sleep(43200)
